@@ -1,0 +1,22 @@
+{
+  "schemaVersion": 1,
+  "id": "khaoextractor",
+  "version": "${version}",
+  "name": "KhaoExtractor",
+  "description": "Extractor tool which outputs Minecraft Data and Registry to JSON files.",
+  "authors": [],
+  "contact": {},
+  "license": "MIT",
+  "icon": "assets/khaoextractor/icon.png",
+  "environment": "server",
+  "entrypoints": {
+    "main": [
+      "dev.khaodoes.khaoextractor.KhaoExtractor"
+    ]
+  },
+  "depends": {
+    "fabricloader": ">=${loader_version}",
+    "fabric": "*",
+    "minecraft": "${minecraft_version}"
+  }
+}
