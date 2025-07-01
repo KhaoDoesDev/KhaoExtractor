@@ -3,19 +3,11 @@ package dev.khaodoes.khaoextractor.extractors;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import dev.khaodoes.khaoextractor.KhaoExtractor.IKhaoExtractor;
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.data.DataTracker;
 import net.minecraft.registry.Registries;
 import net.minecraft.server.MinecraftServer;
-import net.minecraft.state.property.Property;
-
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 public class Entities implements IKhaoExtractor {
 

@@ -7,11 +7,8 @@ import dev.khaodoes.khaoextractor.KhaoExtractor.IKhaoExtractor;
 import net.minecraft.SharedConstants;
 import net.minecraft.network.NetworkPhase;
 import net.minecraft.network.NetworkState;
-import net.minecraft.network.packet.PacketType;
 import net.minecraft.network.state.*;
 import net.minecraft.server.MinecraftServer;
-import net.minidev.json.JSONObject;
-
 import java.util.Arrays;
 import java.util.List;
 

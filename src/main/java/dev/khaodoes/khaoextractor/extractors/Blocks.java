@@ -1,21 +1,13 @@
 package dev.khaodoes.khaoextractor.extractors;
 
 import com.google.gson.JsonArray;
-import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
-import com.mojang.serialization.JsonOps;
-import dev.khaodoes.khaoextractor.KhaoExtractor;
 import dev.khaodoes.khaoextractor.KhaoExtractor.IKhaoExtractor;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
-import net.minecraft.loot.LootTable;
-import net.minecraft.loot.LootTables;
 import net.minecraft.registry.Registries;
-import net.minecraft.registry.RegistryOps;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.state.property.Property;
-import org.jetbrains.annotations.NotNull;
-
 import java.util.HashMap;
 import java.util.Map;
 
