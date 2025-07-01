@@ -4,6 +4,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonElement;
 import dev.khaodoes.khaoextractor.extractors.Blocks;
+import dev.khaodoes.khaoextractor.extractors.Enchantments;
 import dev.khaodoes.khaoextractor.extractors.Entities;
 import dev.khaodoes.khaoextractor.extractors.Items;
 import dev.khaodoes.khaoextractor.extractors.Packets;
@@ -38,7 +39,8 @@ public class KhaoExtractor implements ModInitializer {
                 new Entities(),
                 new Items(),
                 new Packets(),
-                new Recipes()
+                new Recipes(),
+                new Enchantments()
         };
 
         Path outputDir;
