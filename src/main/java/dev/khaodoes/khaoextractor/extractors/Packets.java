@@ -7,9 +7,10 @@ import dev.khaodoes.khaoextractor.KhaoExtractor.IKhaoExtractor;
 import net.minecraft.SharedConstants;
 import net.minecraft.network.NetworkPhase;
 import net.minecraft.network.NetworkState;
+import net.minecraft.network.packet.PacketType;
 import net.minecraft.network.state.*;
 import net.minecraft.server.MinecraftServer;
-import java.util.Arrays;
+
 import java.util.List;
 
 public class Packets implements IKhaoExtractor {
@@ -22,55 +23,60 @@ public class Packets implements IKhaoExtractor {
     @Override
     public JsonElement extract(MinecraftServer server) throws Exception {
         JsonObject packetsJson = new JsonObject();
-
-        List<NetworkState.Factory<?, ?>> clientbound = Arrays.asList(
-                QueryStates.S2C_FACTORY,
-                LoginStates.S2C_FACTORY,
-                ConfigurationStates.S2C_FACTORY,
-                PlayStateFactories.S2C
-        );
-
-        List<NetworkState.Factory<?, ?>> serverbound = Arrays.asList(
+        packetsJson.addProperty("protocol_version", SharedConstants.getProtocolVersion());
+        packetsJson.addProperty("version", SharedConstants.getGameVersion().getName());
+        packetsJson.add("serverbound", serializeBound(List.of(
                 HandshakeStates.C2S_FACTORY,
                 QueryStates.C2S_FACTORY,
                 LoginStates.C2S_FACTORY,
                 ConfigurationStates.C2S_FACTORY,
-                PlayStateFactories.C2S
-        );
-
-        packetsJson.addProperty("protocol_version", SharedConstants.getProtocolVersion());
-        packetsJson.addProperty("version", SharedConstants.getGameVersion().getName());
-
-        packetsJson.add("clientbound", extractSide(clientbound));
-        packetsJson.add("serverbound", extractSide(serverbound));
-
+                PlayStateFactories.C2S), true));
+        packetsJson.add("clientbound", serializeBound(List.of(
+                QueryStates.S2C_FACTORY,
+                LoginStates.S2C_FACTORY,
+                ConfigurationStates.S2C_FACTORY,
+                PlayStateFactories.S2C), false));
         return packetsJson;
     }
 
-    private JsonObject extractSide(List<NetworkState.Factory<?, ?>> factories) {
-        JsonArray handshakingArray = new JsonArray();
-        JsonArray statusArray = new JsonArray();
-        JsonArray loginArray = new JsonArray();
-        JsonArray configurationArray = new JsonArray();
-        JsonArray playArray = new JsonArray();
+    private JsonObject serializeBound(List<NetworkState.Factory<?, ?>> factories, boolean isServerbound) {
+        JsonObject result = new JsonObject();
+        JsonArray handshaking = new JsonArray(), status = new JsonArray(),
+                login = new JsonArray(), configuration = new JsonArray(), play = new JsonArray();
+
         for (NetworkState.Factory<?, ?> factory : factories) {
-            factory.forEachPacketType((reg, id) -> {
-                switch (factory.phase()) {
-                    case NetworkPhase.HANDSHAKING: handshakingArray.add(reg.id().getPath());
-                    case NetworkPhase.STATUS: statusArray.add(reg.id().getPath());
-                    case NetworkPhase.LOGIN: loginArray.add(reg.id().getPath());
-                    case NetworkPhase.CONFIGURATION: configurationArray.add(reg.id().getPath());
-                    case NetworkPhase.PLAY: playArray.add(reg.id().getPath());
+            NetworkPhase phase = factory.phase();
+            factory.forEachPacketType((PacketType<?> packetType, int id) -> {
+                String path = packetType.id().getPath();
+                switch (phase) {
+                    case HANDSHAKING:
+                        if (isServerbound)
+                            handshaking.add(path);
+                        else
+                            throw new IllegalStateException("Clientbound packets shouldn't have handshaking packets.");
+                        break;
+                    case STATUS:
+                        status.add(path);
+                        break;
+                    case LOGIN:
+                        login.add(path);
+                        break;
+                    case CONFIGURATION:
+                        configuration.add(path);
+                        break;
+                    case PLAY:
+                        play.add(path);
+                        break;
                 }
             });
         }
 
-        JsonObject output = new JsonObject();
-        output.add("handshaking", handshakingArray);
-        output.add("status", statusArray);
-        output.add("login", loginArray);
-        output.add("configuration", configurationArray);
-        output.add("play", playArray);
-        return output;
+        if (isServerbound)
+            result.add("handshaking", handshaking);
+        result.add("status", status);
+        result.add("login", login);
+        result.add("configuration", configuration);
+        result.add("play", play);
+        return result;
     }
 }
