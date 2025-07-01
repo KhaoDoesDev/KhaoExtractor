@@ -7,6 +7,7 @@ import dev.khaodoes.khaoextractor.extractors.Blocks;
 import dev.khaodoes.khaoextractor.extractors.Entities;
 import dev.khaodoes.khaoextractor.extractors.Items;
 import dev.khaodoes.khaoextractor.extractors.Packets;
+import dev.khaodoes.khaoextractor.extractors.Recipes;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerLifecycleEvents;
 import net.minecraft.server.MinecraftServer;
@@ -36,7 +37,8 @@ public class KhaoExtractor implements ModInitializer {
                 new Blocks(),
                 new Entities(),
                 new Items(),
-                new Packets()
+                new Packets(),
+                new Recipes()
         };
 
         Path outputDir;
@@ -64,7 +66,7 @@ public class KhaoExtractor implements ModInitializer {
                 }
             }
             logger.info("Extraction complete, took " + (System.currentTimeMillis() - startTime) + "ms to extract data.");
-            server.exit();
+            server.stop(false);
         });
     }
 }
