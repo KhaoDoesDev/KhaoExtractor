@@ -3,15 +3,10 @@ package dev.khaodoes.khaoextractor.extractors;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
-import com.mojang.serialization.JsonOps;
 import dev.khaodoes.khaoextractor.KhaoExtractor.IKhaoExtractor;
-import net.minecraft.component.Component;
-import net.minecraft.component.ComponentMap;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.registry.Registries;
-import net.minecraft.registry.RegistryKeys;
-import net.minecraft.registry.RegistryOps;
 import net.minecraft.server.MinecraftServer;
 
 public class Items implements IKhaoExtractor {
