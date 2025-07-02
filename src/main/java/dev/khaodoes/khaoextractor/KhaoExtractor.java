@@ -8,6 +8,7 @@ import dev.khaodoes.khaoextractor.extractors.Biomes;
 import dev.khaodoes.khaoextractor.extractors.Blocks;
 import dev.khaodoes.khaoextractor.extractors.Enchantments;
 import dev.khaodoes.khaoextractor.extractors.Entities;
+import dev.khaodoes.khaoextractor.extractors.GameEvents;
 import dev.khaodoes.khaoextractor.extractors.Items;
 import dev.khaodoes.khaoextractor.extractors.Packets;
 import dev.khaodoes.khaoextractor.extractors.Particles;
@@ -51,7 +52,8 @@ public class KhaoExtractor implements ModInitializer {
                 new Biomes(),
                 new VillagerProfessions(),
                 new Sounds(),
-                new VillagerTypes()
+                new VillagerTypes(),
+                new GameEvents()
         };
 
         Path outputDir;
