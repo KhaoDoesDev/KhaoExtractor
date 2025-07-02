@@ -19,7 +19,6 @@ public class Sounds implements IKhaoExtractor {
     public JsonElement extract(MinecraftServer server) throws Exception {
         JsonArray soundsArray = new JsonArray();
 
-
         for (SoundEvent soundEvent : Registries.SOUND_EVENT) {
             JsonObject soundJson = new JsonObject();
 
