@@ -18,7 +18,7 @@ public class Items implements IKhaoExtractor {
 
     @Override
     public JsonElement extract(MinecraftServer server) throws Exception {
-        JsonArray itemsJson = new JsonArray();
+        JsonArray itemsArray = new JsonArray();
 
         for (Item item : Registries.ITEM) {
             JsonObject itemJson = new JsonObject();
@@ -34,10 +34,10 @@ public class Items implements IKhaoExtractor {
             itemJson.addProperty("max_damage", defaultStack.getMaxDamage());
             itemJson.addProperty("rarity", defaultStack.getRarity().toString());
 
-            itemsJson.add(itemJson);
+            itemsArray.add(itemJson);
         }
 
-        return itemsJson;
+        return itemsArray;
     }
     
 }

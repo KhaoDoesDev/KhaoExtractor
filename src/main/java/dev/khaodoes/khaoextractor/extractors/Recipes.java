@@ -20,7 +20,7 @@ public class Recipes implements IKhaoExtractor {
 
     @Override
     public JsonElement extract(MinecraftServer server) throws Exception {
-        JsonArray recipesJson = new JsonArray();
+        JsonArray recipesArray = new JsonArray();
         RegistryOps<JsonElement> registryOps = RegistryOps.of(JsonOps.INSTANCE, server.getRegistryManager());
 
         for (RecipeEntry<?> rawRecipe : server.getRecipeManager().values()) {
@@ -33,9 +33,9 @@ public class Recipes implements IKhaoExtractor {
 
             // todo: add numeric ids to the namespace ids.
 
-            recipesJson.add(json);
+            recipesArray.add(json);
         }
 
-        return recipesJson;
+        return recipesArray;
     }
 }
