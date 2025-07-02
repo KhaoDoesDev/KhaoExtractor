@@ -6,6 +6,7 @@ import com.google.gson.JsonElement;
 
 import dev.khaodoes.khaoextractor.extractors.Biomes;
 import dev.khaodoes.khaoextractor.extractors.Blocks;
+import dev.khaodoes.khaoextractor.extractors.DamageTypes;
 import dev.khaodoes.khaoextractor.extractors.Enchantments;
 import dev.khaodoes.khaoextractor.extractors.Entities;
 import dev.khaodoes.khaoextractor.extractors.GameEvents;
@@ -53,7 +54,8 @@ public class KhaoExtractor implements ModInitializer {
                 new VillagerProfessions(),
                 new Sounds(),
                 new VillagerTypes(),
-                new GameEvents()
+                new GameEvents(),
+                new DamageTypes()
         };
 
         Path outputDir;
