@@ -12,6 +12,7 @@ Khao Extractor is a server-side FabricMC mod that extracts Minecraft data to JSO
 - [x] Biomes
 - [x] Villager Professions (Ids, Names)
 - [x] Sounds
+- [x] Villager Types
 - [ ] Translations
 - Soon™
 

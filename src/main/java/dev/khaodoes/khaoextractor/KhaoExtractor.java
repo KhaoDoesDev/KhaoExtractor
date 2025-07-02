@@ -14,6 +14,7 @@ import dev.khaodoes.khaoextractor.extractors.Particles;
 import dev.khaodoes.khaoextractor.extractors.Recipes;
 import dev.khaodoes.khaoextractor.extractors.Sounds;
 import dev.khaodoes.khaoextractor.extractors.VillagerProfessions;
+import dev.khaodoes.khaoextractor.extractors.VillagerTypes;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerLifecycleEvents;
 import net.minecraft.server.MinecraftServer;
@@ -49,7 +50,8 @@ public class KhaoExtractor implements ModInitializer {
                 new Particles(),
                 new Biomes(),
                 new VillagerProfessions(),
-                new Sounds()
+                new Sounds(),
+                new VillagerTypes()
         };
 
         Path outputDir;
