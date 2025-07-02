@@ -1,9 +1,12 @@
 package dev.khaodoes.khaoextractor.extractors;
 
+import java.util.HashSet;
+import java.util.Set;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import dev.khaodoes.khaoextractor.KhaoExtractor.IKhaoExtractor;
+import net.minecraft.item.Item;
 import net.minecraft.registry.Registries;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.village.VillagerProfession;
@@ -24,8 +27,19 @@ public class VillagerProfessions implements IKhaoExtractor {
 
             villagerProfessionJson.addProperty("id", Registries.VILLAGER_PROFESSION.getRawId(villagerProfession));
             villagerProfessionJson.addProperty("name", Registries.VILLAGER_PROFESSION.getId(villagerProfession).getPath());
-            
-            // todo: add more details
+            Set<Item> gatherableItems = new HashSet<>(villagerProfession.gatherableItems());
+            JsonArray gatherableItemsArray = new JsonArray();
+
+            for (Item item : gatherableItems) {
+                JsonObject gatherableItemJson = new JsonObject();
+
+                gatherableItemJson.addProperty("id", Registries.ITEM.getRawId(item));
+                gatherableItemJson.addProperty("name", Registries.ITEM.getId(item).getPath());
+
+                gatherableItemsArray.add(gatherableItemJson);
+            }
+
+            villagerProfessionJson.add("gatherable_items", gatherableItemsArray);
 
             villagerProfessionsArray.add(villagerProfessionJson);
         }
