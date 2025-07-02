@@ -3,6 +3,8 @@ package dev.khaodoes.khaoextractor;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonElement;
+
+import dev.khaodoes.khaoextractor.extractors.Biomes;
 import dev.khaodoes.khaoextractor.extractors.Blocks;
 import dev.khaodoes.khaoextractor.extractors.Enchantments;
 import dev.khaodoes.khaoextractor.extractors.Entities;
@@ -42,7 +44,8 @@ public class KhaoExtractor implements ModInitializer {
                 new Packets(),
                 new Recipes(),
                 new Enchantments(),
-                new Particles()
+                new Particles(),
+                new Biomes()
         };
 
         Path outputDir;
@@ -69,7 +72,7 @@ public class KhaoExtractor implements ModInitializer {
                     logger.severe("Extractor \"" + extractor.fileName() + "\" failed while extracting.");
                 }
             }
-            logger.info("Extraction complete, took " + (System.currentTimeMillis() - startTime) + "ms to extract data.");
+            logger.info("Extraction complete, took " + (System.currentTimeMillis() - startTime) + "ms to extract data. Shutting down...");
             server.stop(false);
         });
     }
