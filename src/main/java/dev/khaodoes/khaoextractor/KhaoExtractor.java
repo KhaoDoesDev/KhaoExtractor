@@ -8,6 +8,7 @@ import dev.khaodoes.khaoextractor.extractors.Enchantments;
 import dev.khaodoes.khaoextractor.extractors.Entities;
 import dev.khaodoes.khaoextractor.extractors.Items;
 import dev.khaodoes.khaoextractor.extractors.Packets;
+import dev.khaodoes.khaoextractor.extractors.Particles;
 import dev.khaodoes.khaoextractor.extractors.Recipes;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerLifecycleEvents;
@@ -40,7 +41,8 @@ public class KhaoExtractor implements ModInitializer {
                 new Items(),
                 new Packets(),
                 new Recipes(),
-                new Enchantments()
+                new Enchantments(),
+                new Particles()
         };
 
         Path outputDir;
@@ -63,7 +65,7 @@ public class KhaoExtractor implements ModInitializer {
                     fileWriter.close();
                     logger.info("Wrote " + extractor.fileName());
                 } catch (Exception e) {
-                    e.printStackTrace();
+                    logger.severe(e.getMessage());
                     logger.severe("Extractor \"" + extractor.fileName() + "\" failed while extracting.");
                 }
             }
